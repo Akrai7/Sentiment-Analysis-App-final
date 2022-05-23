@@ -12,7 +12,6 @@ import re
 import string
 import matplotlib.pyplot as plt
 import time
-import nltk
 
 
 
@@ -30,6 +29,7 @@ def load(vectoriser_path, model_path):
     file.close()
     
     return vectoriser, LRmodel
+
 
 
 
@@ -214,36 +214,32 @@ def progressbar():
 
 
 
-def main():
-
-    st.title('Sentiment Analysis App')
-    st.write('Performing Sentiment Analysis')
-    image = Image.open('Data/sentiment.jpg')
-    st.image(image, use_column_width=True)
-    # st.write('Enter some random tweets in the left sidebar and click on Predict Sentiment!')
 
 
-    # uploaded_file = st.sidebar.file_uploader("Choose a csv file", type="csv")
-    # st.sidebar.write("or")
-    st.sidebar.subheader("Enter single/multiple tweets separated by semicolon : ")
-    tweets = st.sidebar.text_area("Some samples are provided below for reference..", value="I hate twitter;I do not like the movie;Mr. Stark, I don't feel so good;May the Force be with you.;I read the book, the content is not good;This is a new beginning for us", height=500, max_chars=None, key=None)
-    cols = ["tweet"]
+st.title('Sentiment Analysis App')
+st.write('Performing Sentiment Analysis')
+image = Image.open('data/sentiment.jpg')
+st.image(image, use_column_width=True)
+# st.write('Enter some random tweets in the left sidebar and click on Predict Sentiment!')
 
 
-    if (st.sidebar.button('Predict Sentiment')):   
-        progressbar()
+# uploaded_file = st.sidebar.file_uploader("Choose a csv file", type="csv")
+# st.sidebar.write("or")
+st.sidebar.subheader("Enter single/multiple tweets separated by semicolon : ")
+tweets = st.sidebar.text_area("Some samples are provided below for reference..", value="I hate twitter;I do not like the movie;Mr. Stark, I don't feel so good;May the Force be with you.;I read the book, the content is not good;This is a new beginning for us", height=500, max_chars=None, key=None)
+cols = ["tweet"]
 
-        vectoriser, model = load('models/vectoriser.pickle', 'models/Sentiment-LR.pickle')
-        result_df = inference(vectoriser, model, tweets, cols)
-        st.table(result_df)
-        st.text("")
-        st.text("")
-        st.text("")
-        plot(result_df)
     
+if (st.sidebar.button('Predict Sentiment')):   
+    progressbar()
     
-if __name__ == '__main__':
-    main() 
+    vectoriser, model = load('models/vectoriser.pickle', 'models/Sentiment-LR.pickle')
+    result_df = inference(vectoriser, model, tweets, cols)
+    st.table(result_df)
+    st.text("")
+    st.text("")
+    st.text("")
+    plot(result_df)
     
 
 # data = pd.read_csv("data/real_data.csv", encoding = "ISO-8859-1")
