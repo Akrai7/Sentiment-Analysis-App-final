@@ -12,7 +12,8 @@ import re
 import string
 import matplotlib.pyplot as plt
 import time
-
+import nltk
+nltk.download('punkt')
 
 
 @st.cache(allow_output_mutation=True)
