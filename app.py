@@ -218,7 +218,7 @@ def progressbar():
 
 st.title('Sentiment Analysis App')
 st.write('Performing Sentiment Analysis')
-image = Image.open('data/sentiment.jpg')
+image = Image.open('Data/sentiment.jpg')
 st.image(image, use_column_width=True)
 # st.write('Enter some random tweets in the left sidebar and click on Predict Sentiment!')
 
